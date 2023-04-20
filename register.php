@@ -210,11 +210,11 @@ if(isset($_POST['register'])){
               </div>
               <div class="form-group">
                 <div class="col-sm-10">
-                <button type="submit" name="register" class="form_control btn btn-primary mt-3">
+                <button type="submit" name="register" class=" updel mt-3" style="background-color: #5bc0de;">
                     <span class="glyphicon glyphicon-share-alt"></span>
                     Register
                   </button>
-                  <a class="btn btn-primary mt-3" href="index.php">Have a Account? Click here</a>
+                  <a style="text-decoration:none" href="index.php"><button class="updel" style="background-color: #5bc0de;"> a Account? Click here</button></a>
                 </div>
               </div>
         </form>
