@@ -107,62 +107,123 @@ if(isset($_POST['register'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php  require_once "components/boot.php";  ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <title>Register</title>
 </head>
 <style>
-    .hero{
-        background-color: lightgray;
-        width: 45%;
-        border-radius: 25px;
-        margin: 0 auto;
-    }
+    .jumbotron label {
+    font-size:12px;    
+}
+
+.reg-icon{
+    color:#5bc0de;
+    font-weight:bold;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.4) !important;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+    color: #fff;
+    background-color: #5bc0de;
+}
+
+.prj-name{
+    font-weight:bold;
+    color:#5bc0de;
+} 
+.bg-gray{
+    background-color:gainsboro ;
+    margin-top: 140px;
+    padding: 30px;
+    width: 70%;
+}
+#form{
+    margin-left:300px;
+}
+
+
+ 
+
 </style>
+
 <body>
-    <div class="container mt-5">
-        <div class="hero p-3">
-    <h1>Registration Form</h1><br>
-
-    <?php  if(isset($errMsg)) {  ?>
-
-    <div class="alert alert-<?= $errType ?>" role="alert">
-    <?= $errMsg ?>
-    <?= $uploadError ?>
-    </div>
     
-    <?php  }  ?>
 
-    <form class="w-45" method="POST" action="<?= htmlspecialchars($_SERVER['SCRIPT_NAME']); ?>" enctype="multipart/form-data">
+    <div class="container bootstrap snippets bootdey bg-gray">
+  <div class="jumbotron text-center" style="min-height:400px;height:auto;">
+    <div class="col-md-10 col-md-offset-2">
+        <form class="w-45 form-horizontal" id="form" method="POST" role="form" action="<?= htmlspecialchars($_SERVER['SCRIPT_NAME']); ?>" enctype="multipart/form-data">
+            <div class="form-group text-center">
+                <div class="col-sm-10 reg-icon">
+                    <span class="fa fa-user fa-3x mb-3">Register now!</span>
+                </div>
 
-    <!-- <label for="first_name">First Name</label> <br> -->
-    <input type="text" name="first_name" class="form_control" placeholder="Please enter your first name" value="<?= $first_name ?>"> <br>
-    <span class="text-danger"><?= ($fnameError)??""; ?></span> <br>
+                <?php  if(isset($errMsg)) {  ?>
 
-    <!-- <label for="last_name">Last Name</label> <br> -->
-    <input type="text" name="last_name" class="form_control" placeholder="Please enter your last name" maxlength="30" value="<?= $last_name?>"> <br>
-    <span class="text-danger"><?= $lnameError ?></span> <br>
+                            <div class="alert alert-<?= $errType ?>" role="alert">
+                            <?= $errMsg ?>
+                            <?= $uploadError ?>
+                            </div>
 
-    <!-- <label for="email">Email</label> <br> -->
-    <input type="text" name="email" class="form_control" placeholder="Please enter your email" value="<?= $email ?>"> <br>
-    <span class="text-danger"><?= $emailError ?></span> <br>
+                <?php  }  ?>
 
-    <!-- <label for="password">Password</label> <br> -->
-    <input type="password" name="password" class="form_control" placeholder="Please enter your password"> <br>
-    <span class="text-danger"><?= $passError ?></span> <br>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10">
+                  <input type="text" name="first_name" class="form_control w-75" placeholder="Please enter your first name" value="<?= $first_name ?>"> <br>
+                  <span class="text-danger"><?= ($fnameError)??""; ?></span> <br>
 
-    <!-- <label for="date_of_birth">Date of birth</label> <br> -->
-    <input type="date" name="date_of_birth" class="form_control" value="<?= $date_of_birth ?>"> <br>
-    <span class="text-danger"><?= $date_of_birth_error ?></span> <br>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-10">
+                  <input type="text" name="last_name" class="form_control w-75" placeholder="Please enter your last name" maxlength="30" value="<?= $last_name?>"> <br>
+                  <span class="text-danger"><?= $lnameError ?></span> <br>
 
-    <!-- <label for="picture">Picture</label> <br> -->
-    <input type="file" name="image" class="form_control"> <br>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-10">
+                  <input type="text" name="email" class="form_control w-75" placeholder="Please enter your email" value="<?= $email ?>"> <br>
+                  <span class="text-danger"><?= $emailError ?></span> <br>
 
-    <input type="submit" value="Register" name="register" class="form_control btn btn-primary">
-    <a href="index.php">Have a Account? Click here</a>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-10">
+                  <input type="password" name="password" class="form_control w-75" placeholder="Please enter your password"> <br>
+                  <span class="text-danger"><?= $passError ?></span> <br>
 
-    
-    </form>
+                </div>
+
+                <div class="col-sm-10">
+                  <input type="date" name="date_of_birth" class="form_control w-75" value="<?= $date_of_birth ?>"> <br>
+                  <span class="text-danger"><?= $date_of_birth_error ?></span> <br>
+
+                </div>
+
+                <div class="col-sm-10">
+                <input type="file" name="image" class="form_control w-75"> <br>
+                </div>
+
+
+              </div>
+              <div class="form-group">
+                <div class="col-sm-10">
+                <button type="submit" name="register" class="form_control btn btn-primary mt-3">
+                    <span class="glyphicon glyphicon-share-alt"></span>
+                    Register
+                  </button>
+                  <a class="btn btn-primary mt-3" href="index.php">Have a Account? Click here</a>
+                </div>
+              </div>
+        </form>
     </div>
-    </div>
+  </div>
+</div>       
+
+
+
 
 </body>
 </html>

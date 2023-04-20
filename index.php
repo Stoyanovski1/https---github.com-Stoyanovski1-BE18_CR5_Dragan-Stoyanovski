@@ -74,40 +74,127 @@
     <title>Index</title>
 </head>
 <style>
-.hero{
-    background-color: lightgrey;
-    border-radius: 25px;
-    width: 35%;
-    margin: 0 auto;
+body{
+    margin-top:20px;
+    background:#eee;
+}
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+}
 
+@media (min-width: 576px) {
+    .container {
+        max-width: 540px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+
+
+.card-columns .card {
+    margin-bottom: 0.75rem;
+}
+
+@media (min-width: 576px) {
+    .card-columns {
+        column-count: 3;
+        column-gap: 1.25rem;
+    }
+    .card-columns .card {
+        display: inline-block;
+        width: 100%;
+    }
+}
+.text-muted {
+    color: #9faecb !important;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+.mb-3 {
+    margin-bottom: 1rem !important;
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    width: 100%;
 }
 </style>
 <body>
-        <div class="container mt-5">
-            <div class="hero p-3">
-        <h1>Login</h1>
-        <hr>
+        
 
         <?php 
         if(isset($errMsg)){
             echo $errMsg;
         }
         ?>
+                    <br>
+                    <br><br><br><br><br><br>
+                    <form method="POST" class="w-40" action="<?php  echo htmlspecialchars($_SERVER['SCRIPT_NAME']);  ?>" autocomplete="off">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                          <div class="col-md-8">
+                            <div class="card-group mb-0">
+                              <div class="card p-4">
+                                <div class="card-body">
+                                  <h1>Login</h1>
+                                  <p class="text-muted">Sign In to your account</p>
+                                  <div class="input-group mb-3">
+                                    <span class="input-group-addon me-2 mt-1"><i class="fa fa-user"></i></span>
+                                        <input type="email" autocomplete="off" name="email" class="form-control" placeholder="Your Email" value="<?= ($email)??"" ?>" maxlength="40">
+                                        <span class="text-danger"><?php echo ($emailError)??"" ?></span>  <br>
+                                  </div>
+                                  <div class="input-group mb-4">
+                                    <span class="input-group-addon me-2 mt-1"><i class="fa fa-lock"></i></span>
+                                        <input type="password" name="password" class="form_control" placeholder="Your Password" maxlength="15">
+                                        <span class="text-danger"><?php echo ($passError)??"" ?></span> <hr>
+                                  </div>
+                                  <div class="row">
+                                    <div class="col-6">
+                                      <button class="btn btn-block btn-primary px-4" type="submit" name="btn-login">Login</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+                                <div class="card-body text-center">
+                                  <div>
+                                    <h2>Sign up</h2>
+                                    <p>Welcome back! Please enter your login credentials below to access your account. If you don't have an account yet, you can create one by clicking the "Sign Up" button. If you forgot your password, you can reset it by clicking the "Forgot Password" button. Thank you for choosing our service.</p>
+                                    <a class="btn btn-primary active mt-3" href="register.php">Register Now!</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      </form>
 
-            <form method="POST" class="w-40" action="<?php  echo htmlspecialchars($_SERVER['SCRIPT_NAME']);  ?>" autocomplete="off">
-
-            Email:
-            <input type="email" autocomplete="off" name="email" class="form-control" placeholder="Your Email" value="<?= ($email)??"" ?>" maxlength="40">
-            <span class="text-danger"><?php echo ($emailError)??"" ?></span>  <br>
-
-            Password: <br>
-            <input type="password" name="password" class="form_control" placeholder="Your Password" maxlength="15">
-            <span class="text-danger"><?php echo ($passError)??"" ?></span> <hr>
-
-            <button class="btn btn-block btn-primary" type="submit" name="btn-login">Sign in</button>
-            <a href="register.php">Not registred yet? Click here</a>
-
-            </form>
             </div>
 
         </div>
