@@ -214,7 +214,7 @@ if(isset($_POST['register'])){
                     <span class="glyphicon glyphicon-share-alt"></span>
                     Register
                   </button>
-                  <a style="text-decoration:none" href="index.php"><button class="updel" style="background-color: #5bc0de;"> a Account? Click here</button></a>
+                  <button class="updel" style="background-color: #5bc0de;"> <a style="text-decoration:none; color:black" href="index.php">Hava a Account? Click here</a></button>
                 </div>
               </div>
         </form>
