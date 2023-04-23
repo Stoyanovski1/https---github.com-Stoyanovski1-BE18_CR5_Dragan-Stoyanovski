@@ -24,21 +24,24 @@ $resultUsers = mysqli_query($connect, $users);
 $tbody = '';
 if (mysqli_num_rows($resultUsers) > 0) {
     while ($data = mysqli_fetch_assoc($resultUsers)) {
-        $tbody .= "<tr>
-            <td><img class='img-thumbnail rounded-circle' src='pictures/{$data['image']}' alt='{$data['first_name']}'></td>
-            <td> {$data['first_name']}  {$data['last_name']}  </td>
-            <td> {$data['date_of_birth']}  </td>
-            <td> {$data['email']}  </td>
-            <td>
-            <a href='update.php?id={$data['id']}'><button class='btn btn-primary btn-sm' type='button'>Edit</button></a>
-            <a href='delete.php?id={$data['id']}'><button class='btn btn-danger btn-sm' type='button'>Delete</button></a>
-            <a href='details.php?id={$data['id']}'><button class='btn btn-primary btn-sm' type='button'>Details</button></a>
-            </td>
-
-         </tr>";
+        $tbody .= "
+         <div class='col-xl-3 col-sm-6 mb-5 cards' style='margin: 0 auto'>
+        <div class='bg-white rounded shadow-sm py-5 px-4'><img src='pictures/{$data['image']}' alt='{$data['first_name']}' width='100' class='img-fluid rounded-circle mb-3 img-thumbnail shadow-sm'>
+          <h5 class='mb-0'>{$data['first_name']}</h5><span class='small text-uppercase text-muted'>{$data['last_name']}</span>
+          <p>{$data['date_of_birth']}</p>
+          <p>{$data['email']}</p>
+          <ul class='social mb-0 list-inline mt-3'>
+            <li class='list-inline-item'><a href='update.php?id={$data['id']}'><button class='btn btn-primary btn-sm' type='button'>Edit</button></a></li>
+            <li class='list-inline-item'><a href='delete.php?id={$data['id']}'><button class='btn btn-danger btn-sm' type='button'>Delete</button></a></li>
+            <li class='list-inline-item'><a href='details.php?id={$data['id']}'><button class='btn btn-primary btn-sm' type='button'>Details</button></a></li>
+          </ul>
+        </div>
+      </div>
+         
+         ";
     }
 } else {
-    $tbody = "<tr><td colspan='5'><center>No Data Available </center></td></tr>";
+    $tbody = "<center><h1>No Data Available</h1></center>";
 }
 
 mysqli_close($connect);
@@ -54,56 +57,75 @@ mysqli_close($connect);
     <title>Welcome <?= $row['first_name'] ?></title>
     <?php require_once 'components/boot.php' ?>
     <style type="text/css">
-        .img-thumbnail {
-            width: 70px !important;
-            height: 70px !important;
-        }
+body{
+    background:#eee;
+    margin-top:20px;
+}
+.img-thumbnail {
+    padding: .25rem;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: .25rem;
+    /* max-width: 100%;
+    height: auto; */
+    width: 100px !important;
+    height: 100px !important;
+}
 
-        td {
-            text-align: left;
-            vertical-align: middle;
-        }
-
-        tr {
-            text-align: center;
-        }
-
-        .userImage {
-            width: 100px;
-            height: auto;
+.social-link {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    border-radius: 50%;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+.userImage {
+            width: 60px !important;
+            height: 60px !important;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
+
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+  <img class="userImage mt-3" src="pictures/<?= $row['image'] ?>" alt="Adm avatar">
+  <span><h1 class="ms-2">Admin</h1></span>
+    <!-- <div class="collapse navbar-collapse" id="navbarNav"> -->  
+        <a class="my-2 mx-2 text-center" href="products/index.php" style="color: white; text-decoration:none;"><button class="btn btn-primary mx-2">Adopt a Pet</button></a>
+        <a class="my-2 mx-2 text-center" href="logout.php?logout" style="color: white; text-decoration:none;"><button class="btn btn-primary mx-2">Logout</button></a>
+    <!-- </div> -->
+  </div>
+</nav>
+        <!-- NAVBAR --> 
+
+
+     <div class="container">
+     <h2 class="display-4 font-weight-light text-center mt-5">Our Users</h2>
+
         <div class="row">
-            <div class="col-2" style="display:flex">
-                <div>
-                <img class="userImage mt-3" src="pictures/<?= $row['image'] ?>" alt="Adm avatar">
-                <p class="">Administrator</p>
-                </div>
-                <a class="ms-3 mt-3" href="logout.php?logout"><button class="btn btn-primary">Logout</button></a>
+            <!-- ---FORM 1--- -->
+            <div class="container py-5">
+            <div class="row mb-4">
+            <div class="col-lg-5">
+            <!-- <p class="font-italic text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p> -->
             </div>
-            <div class="col-8 mt-2">
-                <p class='h2'>Users</p>
-                <table class='table table-striped'>
-                    <thead class='table-success'>
-                        <tr>
-                            <th>Picture</th>
-                            <th>Name</th>
-                            <th>Date of birth</th>
-                            <th>Email</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?= $tbody ?>
-                    </tbody>
-                </table>
-                <a class="float-end" href="products/index.php"><button class="btn btn-primary">Adopt a pet</button></a>
             </div>
+
+            <div class="row text-center">
+            <?= $tbody ?>
+            </div>
+            </div>
+            <!-- FORM 1 END--- -->
+
         </div>
-    </div>
+    </div> 
 </body>
 </html>

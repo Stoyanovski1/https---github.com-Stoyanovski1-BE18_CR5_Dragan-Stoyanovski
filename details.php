@@ -3,9 +3,9 @@
 
     session_start();
 
-    if(isset($_SESSION["user"])){
-        header("Location: index.php");
-    }
+    // if(isset($_SESSION["user"])){
+    //     header("Location: index.php");
+    // }
     $id = $_GET["id"];
     $sql = "SELECT * FROM user WHERE id = $id";
 
@@ -13,24 +13,28 @@
     // $row = mysqli_fetch_assoc($result);
 
     $tbody = '';
+    $img = '';
     if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $tbody .= "<tr>
-                <td><img class='img-thumbnail rounded-circle' src='pictures/" . $row['image'] . "' alt=" . $row['first_name'] . "></td>
-                <td> {$row['first_name']}  {$row['last_name']}  </td>
-                <td> {$row['date_of_birth']}  </td>
-                <td> {$row['email']}  </td>
-                <td><a href='update.php?id= {$row['id']}'><button class='btn btn-primary btn-sm' type='button'>Edit</button></a>
-                <a href='delete.php?id={$row['id']}'><button class='btn btn-danger btn-sm' type='button'>Delete</button></a>
-                <a href='details.php?id={$row['id']}'><button class='btn btn-primary btn-sm' type='button'>Details</button></a>
-                <a href='dashboard.php'><button class='btn btn-primary btn-sm' type='button'>Back</button></a>
-                </td>
+        while ($data = mysqli_fetch_assoc($result)) {
+            $tbody .= "<div class='col-xl-3 col-sm-6 mb-5 cards' style='margin: 0 auto'>
+            <div class='bg-white rounded shadow-sm py-5 px-4'><img src='pictures/{$data['image']}' alt='{$data['first_name']}' width='100' class='img-fluid rounded-circle mb-3 img-thumbnail shadow-sm'>
+              <h5 class='mb-0'>{$data['first_name']}</h5><span class='small text-uppercase text-muted'>{$data['last_name']}</span>
+              <p>{$data['date_of_birth']}</p>
+              <p>{$data['email']}</p>
+              <ul class='social mb-0 list-inline mt-3'>
+                <li class='list-inline-item'><a href='update.php?id={$data['id']}'><button class='btn btn-primary btn-sm' type='button'>Edit</button></a></li>
+                <li class='list-inline-item'><a href='delete.php?id={$data['id']}'><button class='btn btn-danger btn-sm' type='button'>Delete</button></a></li>
+                <li class='list-inline-item'><a href='./index.php'><button class='btn btn-primary btn-sm' type='button'>Back</button></a></li>
+              </ul>
+            </div>
+          </div>";
 
-             </tr>";
+          $img .= "<img src='pictures/{$data['image']}' alt='{$data['first_name']}' width='100' class='img-fluid rounded-circle mb-3 img-thumbnail shadow-sm'>";
         }
     } else {
-        $tbody = "<tr><td colspan='5'><center>No Data Available </center></td></tr>";
+        $tbody = "<center>No Data Available</center>";
     }
+
 ?>
 
 <!DOCTYPE html>
@@ -50,21 +54,9 @@
     }
 </style>
 <body>
+    <h1 class="text-center">Details about<?= $img ?></h1>
     <div>
-        <table class='table table-striped'>
-                    <thead class='table-success'>
-                        <tr>
-                            <th>Picture</th>
-                            <th>Name</th>
-                            <th>Date of birth</th>
-                            <th>Email</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?= $tbody ?>
-                    </tbody>
-                </table>
+        <?= $tbody ?>
     </div>
 </body>
 </html>
